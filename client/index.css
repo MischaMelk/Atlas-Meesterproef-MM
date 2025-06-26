@@ -28,6 +28,6 @@
  
 body {
   color: var(--color-black);
- 
+  background-color: #f2f2f2;
   margin: 0 auto;
 }

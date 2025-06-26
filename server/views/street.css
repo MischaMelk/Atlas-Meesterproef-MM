@@ -16,7 +16,9 @@ body {
     var(--color-gray-80) 50%,
     var(--color-gray-20) 100%
   );
+  overflow: hidden;
 }
+
 
 #huis {
   text-decoration: none;
@@ -25,6 +27,30 @@ body {
   justify-content: center;
   align-items: center;
   gap: 2rem;
+  padding: 2em;
+}
+
+
+.scroll-container {
+  overflow: hidden;
+  width: 100vw;
+}
+
+.scroll-track {
+  display: flex;
+  width: max-content;
+  animation: scroll-left 30s linear infinite;
+}
+
+.huis {
+  flex: 0 0 auto;
+  margin-right: 2rem;
+}
+
+#huis svg:hover{
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+  z-index: 10;
 }
 
 .wrapper {
@@ -32,7 +58,27 @@ body {
   flex-direction: row;
   gap: 1rem;
   width: max-content;
-  animation: street-scroll linear infinite;
+  animation: street-scroll 30s linear infinite;
+}
+
+.reduced-motion .wrapper {
+  animation:none;
+}
+
+.reduced-motion .wrapper-2{
+  display:none;
+}
+
+.reduced-motion .gedeelte-2{
+  display: none;
+}
+
+.reduced-motion .scroll-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+  width: 100%;
+  white-space: nowrap;
+  position: relative;
 }
 
 .wrapper svg {
@@ -50,8 +96,49 @@ body {
   gap: 0.5rem;
 }
 
+.straat-nav-buttons{
+  display:flex;
+  justify-content: space-between;
+  gap: 3em;
+  align-items: center;
+  margin: 1em;
+}
+
+.straat-nav-buttons a{
+  padding: 14px 28px;
+  background-color: #212121;
+  color: white;
+  font-size: 1.1em;
+  border: 2px solid #F1BD1E;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  font-family: "Merienda", cursive;
+  text-decoration: none;
+  min-width: 14em;
+}
+
+.straat-nav-buttons a:hover {
+  background-color: #333333;
+  color: #F1BD1E;
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
 .header-street {
-  padding: 2rem 0;
+  padding: 1.5em 0;
+  font-size: 2em;
+}
+
+
+.detail-uitgelicht{
+  background: radial-gradient(circle at 50% 25%, #F1BD1E 0%, transparent 33%);
+}
+
+.uitgelicht{
+  font-weight: bold;
+  font-size: 1.5em;
 }
 
 @keyframes street-scroll {
@@ -64,8 +151,17 @@ body {
   }
 }
 
-@media (max-width: 768px) {
-  .wrappe svg {
-    height: 50vh;
+@media (max-width: 1050px) {
+  .straat-nav-buttons{
+    flex-direction: column;
+    margin-bottom: 1em;
+    gap: 0;
   }
 }
+
+@media (max-width: 768px) {
+  .wrapper svg {
+    height: 60vh;
+  }
+}
+

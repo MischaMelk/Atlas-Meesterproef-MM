@@ -583,6 +583,29 @@ section {
 .scene-5-names p {
   font-size: var(--font-medium);
 }
+
+.scene-5-names a{
+  padding: 14px 28px;
+  background-color: #212121;
+  color: white;
+  font-size: 1.1em;
+  border: 2px solid #F1BD1E;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  font-family: "Merienda", cursive;
+  margin-bottom: 2em;
+  text-decoration: none;
+}
+
+.scene-5-names a:hover {
+  background-color: #333333;
+  color: #F1BD1E;
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
 .scene-5-names-text {
   margin: 1rem;
 }

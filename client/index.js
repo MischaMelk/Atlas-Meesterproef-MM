@@ -1,6 +1,37 @@
 import "./index.css";
  
-console.log("Hello, world123");
+console.log("Hello, world124");
+
+// reduced motion toggle
+document.addEventListener('DOMContentLoaded', () => {
+  const checkbox = document.getElementById('reduced-motion-toggle');
+  const main = document.querySelector('main');
+
+  // Detecteer systeemvoorkeur
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Zet checkbox en class als systeemvoorkeur reduce is
+  if (prefersReducedMotion) {
+    checkbox.checked = true;
+    main.classList.add('reduced-motion');
+  }
+
+  // Zet class als checkbox bij init al aangevinkt is (bijv. bij terugkomen op de pagina)
+  if (checkbox.checked) {
+    main.classList.add('reduced-motion');
+  }
+
+  // Luister naar wijzigingen
+  checkbox.addEventListener('change', () => {
+    if (checkbox.checked) {
+      main.classList.add('reduced-motion');
+    } else {
+      main.classList.remove('reduced-motion');
+    }
+  });
+});
+
+
  
 document.addEventListener("DOMContentLoaded", function () {
   const yellowShapes = Array.from(
@@ -26,20 +57,27 @@ document.addEventListener("DOMContentLoaded", function () {
 window.addEventListener("DOMContentLoaded", () => {
   const wrapper = document.querySelector(".wrapper");
   const homes = wrapper.querySelectorAll("#huis").length;
- 
-  if (homes >= 4) {
+
+  if (homes >= 5) {
     const secondsPerHome = 1.5;
     const minDuration = 20;
     const maxDuration = 60;
- 
+
     let duration = homes * secondsPerHome;
     duration = Math.max(minDuration, Math.min(duration, maxDuration));
- 
+
     wrapper.style.animationDuration = `${duration}s`;
   } else {
     wrapper.style.animation = "none";
+
+    // Verberg de gedeelte-2 elementen
+    const gedeelte2Elements = document.querySelectorAll(".gedeelte-2");
+    gedeelte2Elements.forEach(el => {
+      el.style.display = "none";
+    });
   }
 });
+
  
 const tooltip = document.getElementById("tooltip");
 const links = document.querySelectorAll(".straat-link");
@@ -64,11 +102,13 @@ links.forEach((link) => {
   });
 });
  
-gsap.from('svg[aria-label="introSVG"] path', {
-  drawSVG: 0,
-  duration: 30,
-  ease: "power1.inOut",
-});
+if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  gsap.from('svg[aria-label="introSVG"] path', {
+    drawSVG: 0,
+    duration: 30,
+    ease: "power1.inOut",
+  });
+}
  
 const steps = document.querySelectorAll(".story-step");
 const overlay = document.getElementById("story-overlay");
@@ -107,6 +147,8 @@ document.getElementById("prevBtn").addEventListener("click", () => {
  
 showStep(currentStep);
  
+
+
  
 document.querySelectorAll('.dropbtn').forEach(button => {
   button.addEventListener('click', function (e) {
@@ -131,6 +173,47 @@ document.addEventListener('click', function (e) {
       });
   }
 });
+
  
  
- 
+
+document.addEventListener("DOMContentLoaded", function () {
+  const straatTextLinks = document.querySelectorAll(".straat-link-text");
+  const straatPathLinks = document.querySelectorAll(".straat-link");
+
+  function setHover(straat, active) {
+    const textLink = document.querySelector(`.straat-link-text[data-straat="${straat}"]`);
+    const mapLink = document.querySelector(`.straat-link[data-straat="${straat}"]`);
+    const path = mapLink?.querySelector("path");
+
+    if (active) {
+      textLink?.classList.add("hover");
+      path?.classList.add("hover");
+    } else {
+      textLink?.classList.remove("hover");
+      path?.classList.remove("hover");
+    }
+  }
+
+  straatTextLinks.forEach(link => {
+    const straat = link.dataset.straat;
+    link.addEventListener("mouseenter", () => setHover(straat, true));
+    link.addEventListener("mouseleave", () => setHover(straat, false));
+  });
+
+  straatPathLinks.forEach(link => {
+    const straat = link.dataset.straat;
+    const path = link.querySelector("path");
+
+    path?.addEventListener("mouseenter", () => setHover(straat, true));
+    path?.addEventListener("mouseleave", () => setHover(straat, false));
+  });
+});
+
+
+
+
+
+
+
+
