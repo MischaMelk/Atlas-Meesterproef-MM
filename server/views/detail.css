@@ -697,6 +697,30 @@ strong {
   opacity: 0;
 }
 
+.terug-knop{
+  padding: 14px 28px;
+  background-color: #212121;
+  color: white;
+  font-size: 1.1em;
+  border: 2px solid #F1BD1E;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  font-family: "Merienda", cursive;
+  text-decoration: none;
+  width: 6em;
+  display:flex;
+  align-self: center;
+}
+
+.terug-knop:hover {
+  background-color: #333333;
+  color: #F1BD1E;
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
 /* Responsive verbeteringen */
 @media (max-width: 1200px) {
   .story-block {
